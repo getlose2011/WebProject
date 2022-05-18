@@ -2,12 +2,12 @@
 // for details on configuring this project to bundle and minify static web assets.
 
 // Write your JavaScript code.
-function siteFun() {
+function sFun() {
     alert(1);
 }
-function siteFun1() {
-    alert(1);
+function sFun1() {
+    alert(3);
 }
-function siteFun2() {
-    alert(1);
+function sFun2() {
+    alert(5);
 }
