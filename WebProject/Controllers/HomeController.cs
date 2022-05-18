@@ -42,6 +42,17 @@ namespace WebProject.Controllers
             return login?"log in":"logout";
         }
 
+        /// <summary>
+        /// 500 error
+        /// </summary>
+        /// <returns></returns>
+        public string error500()
+        {
+            int i = 0;
+            i = 1 / i;  // cause exception
+            return "";
+        }
+
         public string claimname()
         {
             StringBuilder sb = new StringBuilder();
@@ -59,7 +70,8 @@ namespace WebProject.Controllers
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            //return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return Redirect("~/500.html"); //或http開頭的絕對URL
         }
     }
 }
