@@ -4,6 +4,7 @@ using WebProject.Modelss;
 using WebProject.Modelsss;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.CookiePolicy;
+using WebProject.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -48,10 +49,13 @@ if (!app.Environment.IsDevelopment())
     app.UseExceptionHandler("/Home/Error");
 }
 
-//當用戶輸入的網址找不到時↓
-app.UseStatusCodePagesWithRedirects("~/404.html"); //或直接給http開頭的絕對URL
+//當用戶輸入的網址找不到時↓，已在ErrorHandlerMiddleware處理
+//app.UseStatusCodePagesWithRedirects("/Home/notfound"); //或直接給http開頭的絕對URL
 
 app.UseStaticFiles();
+
+// global error handler
+app.UseMiddleware<ErrorHandlerMiddleware>();
 
 //啟用 cookie 原則功能
 app.UseCookiePolicy(new CookiePolicyOptions

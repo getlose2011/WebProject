@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using System.Net;
 using System.Security.Claims;
 using System.Text;
-using WebProject.Models;
 using WebProject.Service;
 
 namespace WebProject.Controllers
@@ -66,6 +66,21 @@ namespace WebProject.Controllers
 
             return sb.ToString();
         }
+
+        /// <summary>
+        /// 404頁面
+        /// </summary>
+        /// <returns></returns>
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult notfound()
+        {            
+            return Redirect("~/404.html"); //或http開頭的絕對URL
+        }
+
+        /// <summary>
+        /// 500頁面
+        /// </summary>
+        /// <returns></returns>
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
