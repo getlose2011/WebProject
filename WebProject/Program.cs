@@ -8,6 +8,7 @@ using WebProject.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Logging.AddLog4Net("Configs/log4net.Config");
 
 //宣告增加驗證方式，使用 cookie 驗證
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(option => {
@@ -55,7 +56,10 @@ if (!app.Environment.IsDevelopment())
 app.UseStaticFiles();
 
 // global error handler
-app.UseMiddleware<ErrorHandlerMiddleware>();
+if (!app.Environment.IsDevelopment())
+{
+    app.UseMiddleware<ErrorHandlerMiddleware>();
+}
 
 //啟用 cookie 原則功能
 app.UseCookiePolicy(new CookiePolicyOptions

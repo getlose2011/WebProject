@@ -49,7 +49,7 @@ namespace WebProject.Middleware
         private void HandleException(HttpContext context, Exception e)
         {
             string path = context.Request.Path.ToString().TrimStart('/');
-            _logger.LogDebug($"{path}, error => {e.Message}");
+            _logger.LogError($"{path}, error => {e.Message}");
             context.Response.Redirect("/home/error");
         }
 
@@ -57,7 +57,7 @@ namespace WebProject.Middleware
         private void HandlePageNotFound(HttpContext context)
         {
             string path = context.Request.Path.ToString().TrimStart('/');
-            _logger.LogDebug($"{path} not found");
+            _logger.LogInformation($"{path} not found");
             context.Response.Redirect("/home/notfound");
         }
     }

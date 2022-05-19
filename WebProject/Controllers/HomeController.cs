@@ -73,7 +73,7 @@ namespace WebProject.Controllers
         /// <returns></returns>
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult notfound()
-        {            
+        {
             return Redirect("~/404.html"); //或http開頭的絕對URL
         }
 
