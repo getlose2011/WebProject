@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Configuration;
 using System.Diagnostics;
 using System.Net;
 using System.Security.Claims;
@@ -14,16 +15,20 @@ namespace WebProject.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly BookService _service;
         private readonly ActService _actService;
+        private readonly IConfiguration _configuration;
 
-        public HomeController(ILogger<HomeController> logger, BookService service,ActService actService)
+        public HomeController(ILogger<HomeController> logger, BookService service,ActService actService, IConfiguration configuration)
         {
             _logger = logger;
             _service = service;
             _actService = actService;
+            _configuration = configuration;
         }
 
         public async Task<IActionResult> Index()
         {
+            ViewBag.Env = _configuration.GetValue<string>("Env"); // read logDb connection 
+
             //https://www.youtube.com/watch?v=Ep0sFH-2nMQ
             var data = await _service.Get();
             var data1 = _actService.get();

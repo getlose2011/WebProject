@@ -7,6 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <_WebToolingArtifacts Remove="Properties\PublishProfiles\Prod.pubxml" />
+    <_WebToolingArtifacts Remove="Properties\PublishProfiles\Test.pubxml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="BuildBundlerMinifier" Version="3.2.449" />
     <PackageReference Include="Dapper" Version="2.0.123" />
     <PackageReference Include="log4net" Version="2.0.14" />
