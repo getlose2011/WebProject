@@ -1,0 +1,43 @@
+﻿@inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
+@{
+    ViewData["Title"] = "Create";
+}
+@functions{
+    public string GetAntiXsrfRequestToken()
+    {
+        return Xsrf.GetAndStoreTokens(Context).RequestToken;
+    }
+}
+<h1>ajax 頁面送出</h1>
+<h3></h3>
+
+<div class="row">
+    <input type="button" id="antiforgery" value="Antiforgery" />
+   
+</div>
+
+
+@section Scripts{
+     <script type="text/javascript">
+        $(function(){
+            $("#antiforgery").click(function () {
+                    $.ajax({
+                        type: "post",
+                        dataType: "html",
+                        headers:
+                        {
+                            "RequestVerificationToken": '@GetAntiXsrfRequestToken()'
+                        },
+                        url: '@Url.Action("AjaxCreate","Csrf")',
+                        success: function (result) {
+                            $("h3").html(result);
+                        },
+                        error: function (err, scnd) {
+                            alert(err.statusText);
+                        }
+                    });
+                });
+        })
+                
+    </script>
+}
